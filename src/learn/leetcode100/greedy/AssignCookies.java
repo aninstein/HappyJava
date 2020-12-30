@@ -27,5 +27,4 @@ public class AssignCookies {
         int res = findContentChildren(g, s);
         System.out.println(res);
     }
-
 }
