@@ -18,10 +18,37 @@ input: [1, 2] [1, 2, 3]
 output: 2
 ```
 4. 题解
-
 因为**饥饿度最小的孩子最容易吃饱，所以我们先考虑这个孩子**。为了尽量使得剩下的饼干可以满足饥饿度更大的孩子，所以我们应该把**大于等于这个孩子饥饿度的、且大小最小的饼干**给这个孩子。满足了这个孩子之后，我们采取同样的策略，考虑**剩下孩子里饥饿度最小的孩子**，直到没有满足条件的饼干存在。
 
 简而言之，这里的贪心策略是，**给剩余孩子里最小饥饿度的孩子分配最小的能饱腹的饼干**。
+
+```java
+public class AssignCookies {
+
+    public static int findContentChildren(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int numOfChildren = g.length, numOfCookies = s.length;
+        int count = 0;
+        for (int i = 0, j = 0; i < numOfChildren && j < numOfCookies; i++, j++) {
+            while (j < numOfCookies && g[i] > s[j]) {
+                j++;
+            }
+            if (j < numOfCookies) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int[] g = {1, 2};
+        int[] s = {1, 2, 3};
+        int res = findContentChildren(g, s);
+        System.out.println(res);
+    }
+}
+```
 
 
 
