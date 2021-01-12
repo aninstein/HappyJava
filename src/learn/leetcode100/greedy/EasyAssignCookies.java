@@ -3,7 +3,12 @@ package learn.leetcode100.greedy;
 
 import java.util.Arrays;
 
-public class AssignCookies {
+/**
+ * 题目：分发饼干
+ * 题目链接：https://leetcode-cn.com/problems/assign-cookies/
+ * 贪心策略：就是给最饿的小孩最小能够满足他的饼干
+ */
+public class EasyAssignCookies {
 
     public static int findContentChildren(int[] g, int[] s) {
         Arrays.sort(g);
