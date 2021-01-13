@@ -85,5 +85,60 @@ output: 5
 
 贪心策略：在每次遍历中，只考虑并更新相邻一侧的大小关系
 ```java
+public class HardAssignCandy {
 
+    public static int assignCandy(int[] ratings) {
+        if (ratings == null || ratings.length == 0) {
+            return 0;
+        }
+        int dataLen = ratings.length;
+        int[] candys = new int[dataLen];
+        for (int i = 0; i < dataLen; i++) {
+            candys[i] = 1;
+        }
+
+        for (int i = 1; i < dataLen; i++) {
+            if (ratings[i] > ratings[i-1]) {
+                candys[i] += candys[i-1];
+            }
+        }
+
+        int sum = candys[dataLen-1];
+        for (int i = dataLen-1; i > 0; i--) {
+            if (ratings[i] < ratings[i-1]) {
+                candys[i-1] = Math.max(candys[i-1], candys[i] + 1);  // 如果已经比前一个大了，这时候就不需要加了
+            }
+            sum += candys[i-1];
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        int[] data = {1, 0, 2};
+        int res = assignCandy(data);
+        System.out.println(res);
+    }
+
+}
 ```
+## 4. 问题二：区间问题
+### 4.1 无重叠区间
+1. 题目链接：https://leetcode-cn.com/problems/non-overlapping-intervals/
+2. 题目描述：给定多个区间，计算让这些区间互不重叠所需要移除区间的最少个数。起止相连不算重叠。
+3. 输入输出
+输入是一个数组，数组由多个长度固定为2的数组组成，表示区间的开始和结尾。
+输出一个整数，表示需要移除的区间数量。
+```linux
+Input:[[1,2],[2,4],[1,3]]
+Output:1
+```
+
+在这个样例中，我们可以移除区间[1,3]，使得剩余的区间[[1,2],[2,4]]互不重叠。
+
+4. 题解
+
+在选择要保留区间时，区间的结尾十分重要：选择的区间结尾越小，余留给其它区间的空间就越大，就越能保留更多的区间。因此，我们采取的贪心策略为，**优先保留结尾小且不相交的区间**。
+
+具体实现方法为，先把区间按照结尾的大小进行增序排序，每次选择结尾最小且和前一个选择的区间不重叠的区间。
+
+在样例中，排序后的数组为[[1,2],[1,3],[2,4]]。按照我们的贪心策略，首先初始化为区间[1,2]；由于[1,3]与[1,2]相交，我们跳过该区间；由于[2,4]与[1,2]不相交，我们将其保留。因此最终保留的区间为[[1,2],[2,4]]
