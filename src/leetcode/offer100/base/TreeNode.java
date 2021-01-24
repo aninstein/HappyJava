@@ -7,4 +7,7 @@ public class TreeNode {
     public TreeNode(int x) {
         val = x;
     }
+    public boolean isLeaf() {
+        return this.left == null && this.right == null;
+    }
 }
