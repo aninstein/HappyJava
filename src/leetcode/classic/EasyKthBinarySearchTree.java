@@ -1,10 +1,12 @@
-package leetcode.offer100;
+package leetcode.classic;
 
 import leetcode.offer100.base.TreeNode;
+import org.graalvm.compiler.nodes.calc.AbsNode;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
-public class EasyKthTwoSearchTree {
+public class EasyKthBinarySearchTree {
 
     /**
      * 题目：剑指 Offer 54. 二叉搜索树的第k大节点
@@ -34,9 +36,35 @@ public class EasyKthTwoSearchTree {
         if (root == null) {
             return 0;
         }
-        // 先写一个基于栈的中序遍历
+
+        LinkedList<Integer> dataList = new LinkedList<>();
+
+        // 写一个基于栈的倒序中序遍历
         Stack<TreeNode> treeStack = new Stack<>();
         treeStack.push(root);
+        while (!treeStack.empty()) {
+            while (treeStack.peek().right != null) {
+                treeStack.push(treeStack.peek().right);
+            }
+
+            while (!treeStack.empty()) {
+                TreeNode now = treeStack.pop();
+                dataList.add(now.val);
+
+                if (now.left != null) {
+                    treeStack.push(now.left);
+                    break;
+                }
+            }
+        }
+
+        for (Integer data: dataList) {
+            k--;
+            if (k == 0) {
+                return data;
+            }
+        }
+
         return 0;
     }
 
@@ -45,3 +73,20 @@ public class EasyKthTwoSearchTree {
     }
 
 }
+
+//// 官方题解
+//class Solution {
+//    int res, k;
+//    public int kthLargest(TreeNode root, int k) {
+//        this.k = k;
+//        dfs(root);
+//        return res;
+//    }
+//    void dfs(TreeNode root) {
+//        if(root == null) return;
+//        dfs(root.right);
+//        if(k == 0) return;
+//        if(--k == 0) res = root.val;
+//        dfs(root.left);
+//    }
+//}
