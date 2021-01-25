@@ -86,15 +86,15 @@ public class TreeTraversal {
 
         Stack<TreeNode> treeStack = new Stack<>();
         TreeNode now = root;
-        treeStack.add(now);
+        treeStack.push(now);
         while (!treeStack.empty()) {
             now = treeStack.pop();
             treeList.add(now.val);
             if (now.right != null) {
-                treeStack.add(now.right);
+                treeStack.push(now.right);
             }
             if (now.left != null) {
-                treeStack.add(now.left);
+                treeStack.push(now.left);
             }
         }
         return treeList.toArray(new Integer[0]);
@@ -121,11 +121,11 @@ public class TreeTraversal {
         }
 
         Stack<TreeNode> treeStack = new Stack<>();
-        treeStack.add(root);
+        treeStack.push(root);
         while (!treeStack.empty()) {
             // 该过程一直找到没有左节点的节点才停止
             while (treeStack.peek().left != null) {
-                treeStack.add(treeStack.peek().left);
+                treeStack.push(treeStack.peek().left);
             }
 
             // 此时的栈顶元素是没有左节点的，按照中序遍历的特性，可以将其直接输出。
@@ -135,7 +135,7 @@ public class TreeTraversal {
                 treeList.add(now.val);
 
                 if (now.right != null) {
-                    treeStack.add(now.right);
+                    treeStack.push(now.right);
                     break;
                 }
             }
@@ -144,12 +144,43 @@ public class TreeTraversal {
         return treeList.toArray(new Integer[0]);
     }
 
-    public static TreeNode lastTraversalStack(TreeNode root) {
+    /**
+     * 使用栈对树进行后序遍历
+     * 后序遍历在中序的双层循环的基础上需要加入一个记录，专门记录上一次出栈的节点。步骤如下：
+     * - 1. 如果栈顶元素非空且左节点存在，将其入栈，重复该过程。若不存在则进入第2步（该过程和中序遍历一致）
+     * - 2. 判断上一次出栈节点是否当前节点的右节点，或者当前节点是否存在右节点，满足任一条件，将当前节点输出，并出栈。否则将右节点压栈。跳至第1步
+     * @param root
+     * @param treeList
+     * @return
+     */
+    public static Integer[] lastTraversalStack(TreeNode root, LinkedList<Integer> treeList) {
         if (root == null) {
             return null;
         }
+
+        if (treeList == null) {
+            treeList = new LinkedList<>();
+        }
+
         Stack<TreeNode> treeStack = new Stack<>();
-        return root;
+        treeStack.push(root);
+        TreeNode lastPopNode = null;
+        while (!treeStack.empty()) {
+            while (treeStack.peek().left != null) {
+                treeStack.push(treeStack.peek().left);
+            }
+
+            while (!treeStack.empty()) {
+                if (lastPopNode == treeStack.peek().right || treeStack.peek().right == null) {
+                    treeList.add(treeStack.peek().val);
+                    lastPopNode = treeStack.pop();
+                } else if (treeStack.peek().right != null) {
+                    treeStack.push(treeStack.peek().right);
+                    break;
+                }
+            }
+        }
+        return treeList.toArray(new Integer[0]);
     }
 
     /**
@@ -242,6 +273,8 @@ public class TreeTraversal {
         System.out.println("lastTraversal: ");
         Integer[] lastRes = lastTraversal(tree, null);
         printArray(lastRes);
+        Integer[] lastStackRes = lastTraversalStack(tree, null);
+        printArray(lastStackRes);
     }
 
 
