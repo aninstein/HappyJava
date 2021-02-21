@@ -20,4 +20,13 @@ public class ListNode {
         return head;
     }
 
+    public static void printLinkList(ListNode head) {
+        ListNode now = head;
+        while (now != null) {
+            System.out.print(" " + now.val);
+            now = now.next;
+        }
+        System.out.println();
+    }
+
 }
