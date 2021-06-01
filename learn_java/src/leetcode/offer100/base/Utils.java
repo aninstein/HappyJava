@@ -1,6 +1,6 @@
 package leetcode.offer100.base;
 
-public class utils {
+public class Utils {
 
     public static void swap(int a, int b) {
         int temp = a;
