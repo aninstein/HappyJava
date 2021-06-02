@@ -1,4 +1,4 @@
-package leetcode.offer100;
+package leetcode.offer100.arrays;
 
 public class EasyMajorityElement {
 
