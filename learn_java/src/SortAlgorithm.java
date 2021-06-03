@@ -1,10 +1,10 @@
-
+import base.Utils;
 
 public class SortAlgorithm {
 
     public static void main(String[] args) {
         int[] data = {-10000, 2, 7, 1, -9, 100, 5400, -471, -1, 0, 0, 21, 3};
-        int[] ret = shellSort(data);
+        int[] ret = mergeSort(data);
         for (int i : ret) {
             System.out.print(i + " ");
         }
@@ -12,7 +12,7 @@ public class SortAlgorithm {
 
     }
 
-    private static int[] bubbleSort(int[] data){
+    public static int[] bubbleSort(int[] data){
 
         if(data == null || data.length == 0){
             return data;
@@ -31,7 +31,7 @@ public class SortAlgorithm {
         return data;
     }
 
-    private static int[] selectSort(int[] data){
+    public static int[] selectSort(int[] data){
         if(data == null || data.length == 0){
             return data;
         }
@@ -53,7 +53,7 @@ public class SortAlgorithm {
         return data;
     }
 
-    private static int[] insertSort(int[] data) {
+    public static int[] insertSort(int[] data) {
         if(data == null || data.length == 0){
             return data;
         }
@@ -79,7 +79,7 @@ public class SortAlgorithm {
     * 希尔排序
     * 初始步长为队列一半，除以二的递减
     * */
-    private static int[] shellSort(int[] data) {
+    public static int[] shellSort(int[] data) {
         if(data == null || data.length == 0){
             return data;
         }
@@ -101,5 +101,55 @@ public class SortAlgorithm {
 
         return data;
     }
+
+    /**
+     * 归并排序
+     * @param data
+     * @return
+     */
+    public static int[] mergeSort(int[] data) {
+        int len = data.length;
+        if (len < 2) {
+            return data;
+        }
+        int[] temp = new int[len];
+        return doMergeSort(data, temp,0, len);
+    }
+
+    private static int[] doMergeSort(int[] data, int[] temp, int left, int right) {
+        if (left == right) {
+            return data;
+        }
+        int mid = Utils.minNumber(left, right);
+        doMergeSort(data, temp, left, mid);
+        doMergeSort(data, temp, mid + 1, right);
+        return doMerge(data, temp, left, mid, right);
+    }
+
+    private static int[] doMerge(int[] data, int[] temp, int left, int mid, int right) {
+        int i = left, j = mid + 1;
+        int k = 0;
+        while (i < mid && j < right) {
+            if (data[i] <= data[j]) {
+                temp[k] = data[i];
+                i++;
+            } else {
+                temp[k] = data[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < mid) {
+            temp[k++] = data[i++];
+        }
+
+        while (j < right) {
+            temp[k++] = data[j++];
+        }
+
+        return temp;
+    }
+
 
 }

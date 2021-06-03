@@ -1,7 +1,7 @@
 package leetcode.offer100.twoPoint;
 
 
-import leetcode.offer100.base.ListNode;
+import base.ListNode;
 
 public class EasyKthFromEnd {
     /**

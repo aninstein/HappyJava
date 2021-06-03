@@ -1,12 +1,11 @@
 package leetcode.offer100;
 
-import leetcode.offer100.base.TreeNode;
+import base.TreeNode;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.ArrayList;
+
 public class EasyLayerTraversalTree {
 
     /**

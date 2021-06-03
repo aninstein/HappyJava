@@ -1,6 +1,6 @@
 package leetcode.classic;
 
-import leetcode.offer100.base.TreeNode;
+import base.TreeNode;
 
 import java.util.LinkedList;
 import java.util.Stack;

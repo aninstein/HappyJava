@@ -1,6 +1,6 @@
 package leetcode.offer100;
 
-import leetcode.offer100.base.TreeNode;
+import base.TreeNode;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,4 +1,4 @@
-package leetcode.offer100.base;
+package base;
 
 public class Utils {
 
@@ -18,5 +18,13 @@ public class Utils {
             System.out.println("error b: " + b);
             System.out.println(e.getMessage());
         }
+    }
+
+    public static int minNumber(int left, int right) {
+        // (left + right) / 2 会溢出
+        // 推演：
+        // 1) (right - left) / 2 = right/2 - left/2
+        // 2) left + right/2 - left/2 = right/2 + left/2 = (left + right) / 2
+        return left + (right - left) / 2;
     }
 }

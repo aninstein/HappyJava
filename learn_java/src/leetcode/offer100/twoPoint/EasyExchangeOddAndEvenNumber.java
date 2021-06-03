@@ -1,6 +1,6 @@
 package leetcode.offer100.twoPoint;
 
-import leetcode.offer100.base.Utils;
+import base.Utils;
 
 public class EasyExchangeOddAndEvenNumber {
 

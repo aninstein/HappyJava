@@ -1,6 +1,6 @@
 package learn.leetcode100.doublepointer;
 
-import leetcode.offer100.base.ListNode;
+import base.ListNode;
 
 import java.util.HashSet;
 import java.util.Set;

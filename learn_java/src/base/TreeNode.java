@@ -1,4 +1,4 @@
-package leetcode.offer100.base;
+package base;
 
 public class TreeNode {
     public int val;

@@ -1,9 +1,7 @@
 package leetcode.offer100;
 
 
-import leetcode.offer100.base.ListNode;
-
-import java.util.Stack;
+import base.ListNode;
 
 public class EasyReverseList {
 

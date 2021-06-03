@@ -1,6 +1,6 @@
 package leetcode.offer100;
 
-import leetcode.offer100.base.TreeNode;
+import base.TreeNode;
 
 public class EasyLowestCommonAncestorSearchTree {
 
