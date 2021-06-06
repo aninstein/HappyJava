@@ -25,17 +25,54 @@ public class HardReversePairs {
         if (len < 2) {
             return 0;
         }
-
-        int mid = Utils.minNumber(0, len);
-        mergeSort(nums, 0, mid);
-        return 0;
+        int[] temp = new int[len];
+        return countReversePairs(nums, temp, 0, len - 1);
     }
 
-    public static void mergeSort(int[] nums, int left, int right) {
+    private static int countReversePairs(int[] nums, int[] temp, int left, int right) {
+        if (left == right) {
+            return 0;
+        }
 
+        int mid = Utils.midNumber(left, right);
+        int leftPairs = countReversePairs(nums, temp, left, mid);
+        int rightPairs = countReversePairs(nums, temp, mid + 1, right);
+
+        if (nums[mid] <= nums[mid + 1]) {
+            return leftPairs + rightPairs;
+        }
+
+        int crossPairs = countAndMerge(nums, temp, left, mid, right);
+        return leftPairs + crossPairs + rightPairs;
+    }
+
+    private static int countAndMerge(int[] nums, int[] temp, int left, int mid, int right) {
+        for (int i = left; i <= right ; i++) {
+            temp[i] = nums[i];
+        }
+
+        int i = left, j = mid + 1;
+        int count = 0;
+        for (int k = left; k <= right; k++) {
+            if (i == mid + 1) {
+                nums[k] = temp[j++];
+            } else if (j == right + 1) {
+                nums[k] = temp[i++];
+            } else if (temp[i] <= temp[j]) {
+                nums[k] = temp[i++];
+            } else {
+                nums[k] = temp[j++];
+                count += (mid - i + 1);
+            }
+        }
+        return count;
     }
 
     public static void main(String[] args) {
 
     }
+
 }
+
+
+

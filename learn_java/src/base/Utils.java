@@ -20,7 +20,7 @@ public class Utils {
         }
     }
 
-    public static int minNumber(int left, int right) {
+    public static int midNumber(int left, int right) {
         // (left + right) / 2 会溢出
         // 推演：
         // 1) (right - left) / 2 = right/2 - left/2

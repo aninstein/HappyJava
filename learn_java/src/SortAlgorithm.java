@@ -4,7 +4,7 @@ public class SortAlgorithm {
 
     public static void main(String[] args) {
         int[] data = {-10000, 2, 7, 1, -9, 100, 5400, -471, -1, 0, 0, 21, 3};
-        int[] ret = mergeSort(data);
+        int[] ret = fastSort(data);
         for (int i : ret) {
             System.out.print(i + " ");
         }
@@ -12,6 +12,11 @@ public class SortAlgorithm {
 
     }
 
+    /**
+     * 冒泡排序
+     * @param data
+     * @return
+     */
     public static int[] bubbleSort(int[] data){
 
         if(data == null || data.length == 0){
@@ -31,6 +36,11 @@ public class SortAlgorithm {
         return data;
     }
 
+    /**
+     * 选择排序
+     * @param data
+     * @return
+     */
     public static int[] selectSort(int[] data){
         if(data == null || data.length == 0){
             return data;
@@ -53,6 +63,11 @@ public class SortAlgorithm {
         return data;
     }
 
+    /**
+     * 插入排序
+     * @param data
+     * @return
+     */
     public static int[] insertSort(int[] data) {
         if(data == null || data.length == 0){
             return data;
@@ -120,7 +135,7 @@ public class SortAlgorithm {
         if (left == right) {
             return data;
         }
-        int mid = Utils.minNumber(left, right);
+        int mid = Utils.midNumber(left, right);
         doMergeSort(data, temp, left, mid);
         doMergeSort(data, temp, mid + 1, right);
         return doMerge(data, temp, left, mid, right);
@@ -151,5 +166,39 @@ public class SortAlgorithm {
         return temp;
     }
 
+    /**
+     * 快速排序
+     * @param data
+     * @return
+     */
+    public static int[] fastSort(int[] data) {
+        int len = data.length;
+        if (len < 2) {
+            return data;
+        }
+        doFastSort(data, 0, len - 1);
+        return data;
+    }
+
+    private static void doFastSort(int [] data, int left, int right) {
+        if (left < right) {
+            int pos = position(data, left, right);
+            doFastSort(data, left, pos - 1);  // pos会被当做主元
+            doFastSort(data, pos + 1, right);
+        }
+    }
+
+    private static int position(int[] data, int left, int right) {
+        int index = data[right];  // 使用最后一个当做主元
+        int i = left - 1;  // left即上一个，若left为0，则此时i为-1
+        for (int j = left; j < right; j++) {
+            if (index > data[j]) {
+                i++;
+                Utils.swapArray(data, i, j);
+            }
+        }
+        Utils.swapArray(data, i + 1, right);
+        return i + 1;
+    }
 
 }
