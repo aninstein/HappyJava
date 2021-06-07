@@ -1,4 +1,4 @@
-package leetcode.offer100.twoPoint;
+package leetcode.offer100.lctwoPoint;
 
 import base.Utils;
 

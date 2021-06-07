@@ -1,4 +1,4 @@
-package leetcode.offer100.arrays;
+package leetcode.offer100.lcarrays;
 
 
 import base.Utils;
