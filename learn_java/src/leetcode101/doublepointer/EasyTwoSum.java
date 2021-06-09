@@ -1,4 +1,4 @@
-package learn.leetcode100.doublepointer;
+package leetcode101.doublepointer;
 
 public class EasyTwoSum {
 

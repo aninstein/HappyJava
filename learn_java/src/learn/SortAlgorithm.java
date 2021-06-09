@@ -1,3 +1,5 @@
+package learn;
+
 import base.Utils;
 
 public class SortAlgorithm {
@@ -8,8 +10,6 @@ public class SortAlgorithm {
         for (int i : ret) {
             System.out.print(i + " ");
         }
-
-
     }
 
     /**
