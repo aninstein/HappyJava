@@ -33,8 +33,10 @@ public class MidPermutation {
         }
 
         HashSet<String> charSet = new HashSet<>();
-        for (int i = 0; i < charArray.length; i++) {
-            if (charSet.contains(charArray[i])) {
+
+        // 这个i得从index开始，不然的话数据每一次都是从头来一次
+        for (int i =index; i < charArray.length; i++) {
+            if (charSet.contains(charArray[i])) {  // 剪枝，主要是对付类似输入：abb，这里面有bb这个重复的字符的
                 continue;
             }
             charSet.add(charArray[i]);
