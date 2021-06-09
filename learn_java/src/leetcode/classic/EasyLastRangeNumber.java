@@ -1,4 +1,4 @@
-package leetcode.offer100.classic;
+package leetcode.classic;
 
 public class EasyLastRangeNumber {
 
